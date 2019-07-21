@@ -1,5 +1,4 @@
 const services = require('../services/users')
-const jwt = require('jwt-simple')
 
 async function getUsers(){
    try{
@@ -49,24 +48,6 @@ async function deleteUser(id){
         return err
     }
 }
-async function updateUserToken(id,payload){
-    try{
-        let token = jwt.encode(payload,process.env.SECRET)
-        let data = await services.updateToken(id,token)
-        return data
-    }catch(err){
-        return err
-    }
-}
-async function getUserToken(id){
-    try{
-        let data = await services.getToken(id)
-        return data
-    }catch(err){
-        return err
-    }
-}
-
 
 module.exports = {
     getUsers,
@@ -74,7 +55,5 @@ module.exports = {
     newUser,
     updateUser,
     updateUserPassword,
-    deleteUser,
-    updateUserToken,
-    getUserToken
+    deleteUser
 }

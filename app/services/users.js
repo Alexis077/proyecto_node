@@ -20,9 +20,18 @@ async function findUserById(id) {
         return err
     }
 }
-async function findUserByName(user) {
+async function findUserByName(user_name) {
     try{
-        let sql = `SELECT * FROM users WHERE user = '${user}' LIMIT 1;`
+        let sql = `SELECT * FROM users WHERE user = '${user_name}' LIMIT 1;`
+        let data = await exec.executeGet(sql)
+        return data
+    }catch(err){
+        return err
+    }
+}
+async function findUserByEmail(email) {
+    try{
+        let sql = `SELECT * FROM users WHERE email = '${email}' LIMIT 1;`
         let data = await exec.executeGet(sql)
         return data
     }catch(err){
@@ -99,6 +108,7 @@ async function encryptPassword(password){
 module.exports = {
     findUserById,
     findUserByName,
+    findUserByEmail,
     createUser,
     updateUser,
     updatePasword,
