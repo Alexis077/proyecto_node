@@ -6,12 +6,13 @@ async function validate(req,res,next){
             return res
             .status(401)
             .send({message: "Token expirado"});
+        }else{
+            next()
         }           
     }catch(error){
         res.status(500).send({message:"Token invalido"})
     }
     
-    next()
 }
 module.exports = {
     validate
